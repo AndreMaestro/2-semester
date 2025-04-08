@@ -32,6 +32,51 @@ int pop (queue *&h, queue *&t) {
     return i;
 }
 
+int findMax (queue *&h){
+    if (!h) return 0;
+
+    int maxval = h -> inf;
+    queue *current = h -> next;
+    while (current) {
+        if (current -> inf > maxval){
+            maxval = current->inf;
+        }
+        current = current->next;
+    }
+    return maxval;
+}
+
+int findLastOdd(queue *&h){
+    int lastOdd = 0;
+    queue *current = h;
+    while(current){
+        if(current->inf %2 != 0){
+            lastOdd = current->inf;
+        }
+        current = current->next;
+    }
+    return lastOdd;
+}
+
+void insertAfterMax(queue *&h, queue *&t, int maxval, int oddval){
+    if (!h) return;
+    
+    queue *tmphead = NULL, *tmptail = NULL;
+
+    while(h) {
+        int val = pop(h, t);
+        push (tmphead, tmptail, val);
+
+        if (val == maxval) {
+            push(tmphead, tmptail, oddval);
+        }
+    }
+
+    while (tmphead){
+        push(h, t, pop(tmphead, tmptail));
+    }
+}
+
 void printQueue (queue *h){
     queue *current = h;
     while (current) {
@@ -39,4 +84,35 @@ void printQueue (queue *h){
         current = current -> next;
     }
     cout << endl;
+}
+
+int main() {
+    queue *head = NULL, *tail = NULL;
+    
+    int num[] = {2,8,2,1,6,8,8,1,2,2,8,2,1};
+    int n = sizeof(num)/sizeof(num[0]);
+
+    for(int i = 0; i < n; i++){
+        push(head, tail, num[i]);
+    }
+
+    cout << "Исходная очередь: ";
+    printQueue(head);
+
+    int maxval = findMax(head);
+    cout << "Максимальный элемент: " << maxval << endl;
+
+    int lastOdd = findLastOdd(head);
+    cout << "Последний нечетный элемент: " << lastOdd << endl;
+
+    insertAfterMax(head, tail, maxval, lastOdd);
+
+    cout << "Результат: ";
+    printQueue(head);
+
+    while(head) {
+        pop(head, tail);
+    }
+
+    return 0;
 }
