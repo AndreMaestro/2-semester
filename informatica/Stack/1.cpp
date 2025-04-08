@@ -12,8 +12,8 @@ struct stack{
 
 void push (stack *&h, string X){
     stack *r = new stack;
-    r ->inf = X;
-    r ->next = h;
+    r -> inf = X;
+    r -> next = h;
     h = r;
 }
 
