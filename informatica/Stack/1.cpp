@@ -2,17 +2,34 @@
 */
 
 #include <iostream>
+#include <vector>
 #include <string>
 using namespace std;
 
 struct stack{
-    int inf;
+    char inf;
     stack *next;
 };
 
-void push (stack *&h, int x){
+void push (stack *&h, char X){
     stack *r = new stack;
-    r ->inf = x;
+    r ->inf = X;
     r ->next = h;
-    h =r;
+    h = r;
+}
+
+char pop(stack *& h) {
+    char X = h -> inf;
+    stack *p = h;
+    h = h -> next;
+    delete p;
+    return X;
+}
+
+void reverse (stack *& h) {
+    stack *head1 = NULL;
+    while(h){
+        push(head1, pop(h));
+    }
+    h = head1;
 }
