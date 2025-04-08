@@ -1,8 +1,6 @@
 /*Создать очередь из целых чисел. Выполнить циклический сдвиг очереди так, чтобы на первом месте было первое составное число. Например, было  2 3 5 4 8 6 9 1 4 5 7. Стало 4 8 6 9 1 4 5 7 2 3 5*/
 
 #include <iostream>
-#include <vector>
-#include <string>
 using namespace std;
 
 bool isComposite(int n){
