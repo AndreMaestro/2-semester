@@ -27,10 +27,10 @@ string pop(stack *& h) {
 }
 
 stack* filterWordsByLastLetter(stack *& h, char letter){
-    stack* tmpStack = nullptr;
-    stack* resStack = nullptr;
+    stack* tmpStack = NULL;
+    stack* resStack = NULL;
 
-    while(h != nullptr) {
+    while(h != NULL) {
         string w = pop(h);
         push(tmpStack, w);
 
@@ -45,15 +45,23 @@ stack* filterWordsByLastLetter(stack *& h, char letter){
 
 void printStack(stack *& h) {
     stack* tmp = h;
-    while(tmp != nullptr){
+    while(tmp != NULL){
         cout << tmp -> inf << " ";
         tmp = tmp -> next;
     }
     cout << endl;
 }
 
+void reverse(stack *& h){
+    stack *head1 = NULL;
+    while(h) {
+        push(head1, pop(h));
+    }
+    h = head1;
+}
+
 int main() {
-    stack* original = nullptr;
+    stack* original = NULL;
 
     push(original, "aaa");
     push(original, "fdds");
@@ -63,13 +71,14 @@ int main() {
     push(original, "rty");
     push(original, "fes");
 
+    reverse(original);
     cout << "Исходный стек: ";
     printStack(original);
 
     char targetLetter = 's';
     stack* result = filterWordsByLastLetter(original, targetLetter);
-
-    cout << " Слова, оканчивающиеся на '" << targetLetter << "': ";
+    reverse(result);
+    cout << "Слова, оканчивающиеся на '" << targetLetter << "': ";
     printStack(result);
 
     return 0;
