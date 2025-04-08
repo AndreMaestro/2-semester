@@ -86,9 +86,6 @@ int main() {
     cout << "После сдвига: ";
     printQueue(head);
     
-    while(head) {
-        pop(head, tail);
-    }
-
+    
     return 0;
 }
