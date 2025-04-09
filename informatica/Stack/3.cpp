@@ -32,6 +32,7 @@ int pop (queue *&h, queue *&t) {
     return i;
 }
 
+
 int findMax (queue *&h){
     if (!h) return 0;
 
@@ -58,6 +59,24 @@ int findLastOdd(queue *&h){
     return lastOdd;
 }
 
+void reverse(queue *&h, queue *&t) {
+    queue *prev = NULL;
+    queue *current = h;
+    queue *next = NULL;
+    
+    while (current) {
+        next = current->next; 
+        current->next = prev; 
+        prev = current; 
+        current = next; 
+    }
+    
+    
+    t = h;  
+    h = prev; 
+}
+
+
 void insertAfterMax(queue *&h, queue *&t, int maxval, int oddval){
     if (!h) return;
     
@@ -75,6 +94,7 @@ void insertAfterMax(queue *&h, queue *&t, int maxval, int oddval){
     while (tmphead){
         push(h, t, pop(tmphead, tmptail));
     }
+    
 }
 
 void printQueue (queue *h){
