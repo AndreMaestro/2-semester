@@ -67,7 +67,6 @@ int performOperations(char op, int a, int b) {
     return pop(pr);
 }
 
-
 int main() {
     string prefixExpr;
     cout << "Enter prefix exprression: ";
